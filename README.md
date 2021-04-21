@@ -6,9 +6,11 @@
 
 > line bellow: using Typescript Node to avoid using module.exports on server.ts file
 
+> `--respawn` to hot reload the application
+
 ```javascript
 "scripts": {
-  "dev": "ts-node-dev src/server.ts"
+  "dev": "ts-node-dev --respawn src/server.ts"
 },
 ```
 
@@ -125,6 +127,7 @@ Here we're going to use the custom script that we created at `package.json typeo
 ```
 $ yarn typeorm migration:create -n CreateSettings
 ```
+The `migration:create` code is used to create the migration file with the methods that are used to create and drop the tables of especific entity
 
 Use `migration:run` to execute the migration
 
@@ -140,3 +143,6 @@ $ sudo apt install sqlite3
 
 > Also if you want, you can install beekeeper software to see your database, like a SQuirreL, very simple to configure and use:
 see more on [Beekepper](https://www.beekeeperstudio.io/).
+
+**<h3>Creation Files Order</h3>**
+Entities, Repositories, Services, Controllers
