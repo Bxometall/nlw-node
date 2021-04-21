@@ -118,7 +118,8 @@ export class User {
 ```
 see more on [TypeORM](https://typeorm.io/#/).
 
-**<h3>TypeORM Migration<h3>**
+**<h3>TypeORM Migration</h3>**
+
 Here we're going to use the custom script that we created at `package.json typeorm` to execute typeorm, since we didn't installed the tool and we're using from the `node_modules`.
 
 ```

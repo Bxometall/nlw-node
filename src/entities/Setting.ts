@@ -1,6 +1,7 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm'
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid' // using a lib to create uuid, cus some databases use different modes to create uuid
 
+@Entity('settings')
 class Setting {
 
   @PrimaryColumn()
@@ -22,6 +23,12 @@ class Setting {
   
   @UpdateDateColumn()
   created_at: Date;
+
+  constructor() {
+    if(!this.id) {
+      this.id = uuid();
+    }
+  }
 }
 
 export { Setting }
