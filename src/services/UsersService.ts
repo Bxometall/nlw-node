@@ -13,18 +13,22 @@ class UsersService {
   async create(email: string) {
     // verify if user already exists
     const userExists = await this.usersRepository.findOne({ email })
-
+    
     // if exists, return user from db
     if (userExists) {
       return userExists
     }
-
+    
     // if not, create on db
     const user = this.usersRepository.create({ email }) // to create the entity (new User(email, username...))
-
+    
     await this.usersRepository.save(user)
-
+    
     return user
+  }
+  
+  async findByEmail(email: string) {
+    return await this.usersRepository.findOne({ email })
   }
 }
 

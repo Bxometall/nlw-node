@@ -99,6 +99,12 @@ $ yarn add typeorm reflect-metada sqlite3
 > 
 > IMPORTANT: TypeORM needs typescript cus you need to inform the properties type
 
+> IMPORTANT: If you, like me, are using windows with wsl (linux) to code and you have beekeeper installed, you're going to create your database file on your windows subsystem because it can't be read by network, so on your `ormconfig.json` change:
+
+```javascript
+"database": "/mnt/c/some_folder/database.sqlite"
+```
+
 ```javascript
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
@@ -146,3 +152,47 @@ see more on [Beekepper](https://www.beekeeperstudio.io/).
 
 **<h3>Creation Files Order</h3>**
 Entities, Repositories, Services, Controllers
+
+**<h3>Websock Conection (Webscocket Protocol)</h3>**
+It's a connection that stays opened when is called for the first time, not like a http protocol that only reponds a call made by a client.
+
+To work with WSProtocol we gonna need to install somethings:
+First we going to need the websocket plugin
+```
+$ yarn add socket.io
+```
+
+After we going to add the types of this plugin so we can see wich ones we going to use when importing to the project. Install only as a Development dependency `-D`
+
+```
+$ yarn add @types/socket.io -D
+```
+
+Then we gonna need one more plugin that is called `EJS`. **EJS** *(Embedded Javascript)* is a engine that make it easier too see html and javascript code from backend to frontend in a especif url. So install `EJS Plugin` as well
+
+```
+$ yarn add ejs
+```
+
+To work it with some configurations has to be made on our `server.js` file:
+
+```javascript
+import path from 'path'
+
+const app = express();
+
+app.use(express.static(path.join(__dirname, '..', 'public')))
+app.set('views', path.join(__dirname, '..', 'public'))
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'html')
+
+app.get("/pages/client", (request: Request, response: Response) => {
+  return response.render('html/client.html')
+})
+```
+
+And to use our WS Application (frontend) we're going to need the client version of the plugin, what we installed before was the backend plugin:
+
+```
+$ yarn add socket.io-client
+```
