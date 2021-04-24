@@ -10,7 +10,7 @@ class MessagesController {
     const messagesService = new MessagesService()
 
     try {
-      const message = await messagesService.create({ admin_id, text, user_id })
+      const message = await messagesService.create({ adminId: admin_id, text, user_id })
   
       return response.json(message)
     } catch(err) {
