@@ -4,7 +4,7 @@ import { MessageRepository } from "../repositories/MessagesRepository"
 import { UsersRepository } from "../repositories/UsersRepository"
 
 interface IMessageCreate {
-  admin_id?: string // ? means that it can not be present
+  adminId?: string // ? means that it can not be present
   text: string
   user_id: string
 }
@@ -17,7 +17,7 @@ class MessagesService {
     this.messagesRepository = getCustomRepository(MessageRepository)
   }
 
-  async create({ admin_id, text, user_id }: IMessageCreate) {
+  async create({ adminId, text, user_id }: IMessageCreate) {
     const usersRepo = getCustomRepository(UsersRepository)
     
     const user = await usersRepo.findOne({ id: user_id }) // this is one way to do, on the listByUser I'm using a simpler way to find
@@ -28,12 +28,12 @@ class MessagesService {
     }
     
     const message = this.messagesRepository.create({
-      adminId: admin_id,
+      adminId,
       text,
       user
     })
     
-    await this.messagesRepository.save(message)
+    return await this.messagesRepository.save(message)
   }
   
   async listByUser(user_id: string) {
@@ -47,7 +47,7 @@ class MessagesService {
       relations: ['user']
     }) 
     
-    console.log('list %s', JSON.stringify(list))
+    // console.log('list %s', JSON.stringify(list))
 
     return list
   }

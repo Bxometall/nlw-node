@@ -16,6 +16,10 @@ app.get("/pages/client", (request: Request, response: Response) => {
   return response.render('html/client.html')
 })
 
+app.get("/pages/admin", (request: Request, response: Response) => {
+  return response.render('html/admin.html')
+})
+
 const http = createServer(app) // creating HTTP Protocol
 const io = new Server(http) // creating WebSocket Protocol
 

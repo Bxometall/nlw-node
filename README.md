@@ -196,3 +196,40 @@ And to use our WS Application (frontend) we're going to need the client version 
 ```
 $ yarn add socket.io-client
 ```
+
+**<h3>Mustache</h3>**
+`mustache.js` is a zero-dependency implementation of the mustache template system in JavaScript.
+
+Is a logic-less template syntax. It can be used for HTML, config files, source code - anything. It works by expanding tags in a template using values provided in a hash or object.
+
+```
+$ yarn add mustache
+or
+$ npm install mustache --save
+```
+or you can add directly on html file
+
+```html
+<script src="https://unpkg.com/mustache@latest"></script>
+```
+
+Example:
+```html
+<html>
+  <body onload="renderHello()">
+    <div id="target">Loading...</div>
+    <script id="template" type="x-tmpl-mustache">
+      Hello {{ name }}!
+    </script>
+
+    <script src="https://unpkg.com/mustache@latest"></script>
+    <script>
+      function renderHello() {
+        var template = document.getElementById('template').innerHTML;
+        var rendered = Mustache.render(template, { name: 'Luke' });
+        document.getElementById('target').innerHTML = rendered;
+      }
+    </script>
+  </body>
+</html>
+```
