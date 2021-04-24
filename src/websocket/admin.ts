@@ -45,9 +45,12 @@ io.on('connect', async (socket) => {
 
     const { userId } = params
 
-    await connService.updateAdminId(userId, socket.id)
+    /**
+     * commented cus without the list with the userId it stops working
+     */
+    // await connService.updateAdminId(userId, socket.id)
 
-    const allConnectionsWithoutAdmin = await connService.findWithoutAdmin()
-    io.emit('admin_list_all_users', allConnectionsWithoutAdmin)
+    // const allConnectionsWithoutAdmin = await connService.findWithoutAdmin()
+    // io.emit('admin_list_all_users', allConnectionsWithoutAdmin)
   })
 })
